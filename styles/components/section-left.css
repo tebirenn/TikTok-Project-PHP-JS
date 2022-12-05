@@ -1,0 +1,81 @@
+#section-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 25px 0;
+    width: 15%;
+    overflow: hidden;
+    transition: .4s;
+}
+#section-left:hover {
+    overflow-y: scroll;
+}
+#main-left-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.side-menu {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 700;
+    color: #000;
+}
+.side-line {
+    display: flex;
+    width: 98%;
+    border-bottom: 0.5px solid #1618231F;
+}
+.side-account {
+    display: flex;
+}
+.main-left-recomendation {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.main-left-recomendation > p {
+    font-size: 14px;
+    font-weight: 500;
+}
+.main-left-recomendation > p:last-child {
+    color: #fe2c55;
+    font-weight: 600;
+}
+.side-account {
+    display: flex;
+    gap: 10px;
+}
+.side-account h6 {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 16px;
+}
+.side-account p {
+    font-size: 12px;
+    color: #161823BF;
+}
+#section-left footer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+#section-left footer p {
+    font-size: 10px;
+    font-weight: 500;
+}
+#section-left footer > span {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+#section-left footer > span > span {
+    display: flex;
+    gap: 5px;
+}
+#section-left footer span p:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

@@ -24,6 +24,10 @@ include "../config/db.php";
                 <input type="text" placeholder="Желаемое имя пользователя" name="username">
             </span>
             <span>
+                <p>Ваше имя</p>
+                <input type="text" placeholder="Введите свое имя" name="justname">
+            </span>
+            <span>
                 <p>Пароль</p>
                 <input type="password" placeholder="Придумайте пароль" name="password-1">
                 <input type="password" placeholder="Введите пароль повторно" name="password-2">
