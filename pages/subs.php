@@ -20,13 +20,23 @@ include "../config/db.php";
     <section>
         <?php include "components/section-left.php" ?>
         <div id="section-right">
+
+            <?php
+            
+            $query_pro = mysqli_query($conn, "SELECT username, name, avatar_name FROM profile");
+
+            while($row = mysqli_fetch_assoc($query_pro)) {
+                $queryIsSub = mysqli_query($conn, "SELECT * FROM subscribed WHERE sub_from=\"" . $_SESSION["username"] . "\" AND sub_to=\"" . $row["username"] . "\";");
+                if ($row["username"] != $_SESSION["username"] && mysqli_num_rows($queryIsSub) > 0) {
+            ?>
             <div class="right--item">
-                <a href="otherProfile.html" class="item-author-avatar"></a>
+                <a href="<?=$BASE_URL?>/pages/otherProfile.php?user=<?=$row['username']?>" class="item-author-avatar">
+                    <img src="<?=$BASE_URL?>/images/avatars/<?=$row["avatar_name"]?>" alt="">
+                </a>
                 <div class="item-video">
                     <span class="acc-names">
-                        <a href="">acc-login</a>
-                        <p>acc-name</p>
-                        <p style="font-weight: 500;">9-12</p>
+                        <a href=""><?=$row["username"]?></a>
+                        <p><?=$row["name"]?></p>
                     </span>
                     <span class="hashtags">
                         <p>#tiktok</p>
@@ -34,65 +44,36 @@ include "../config/db.php";
                         <p>#rec</p>
                     </span>
                     <span class="music">
-                        <img src="../images/music.svg" alt="">
+                        <img src="<?=$BASE_URL?>/images/music.svg" alt="">
                         <p>The Weekend - Starboy</p>
                     </span>
                     <div class="item-video-part">
-                        <span class="video"></span>
+                        <video class="video" controls>
+                            <source src="<?=$BASE_URL?>/videos/sample.mp4" type="video/mp4">
+                        </video>
                         <span>
                             <span class="video-grade-btn">
-                                <button><img src="../images/like.svg" alt=""></button>
+                                <button><img src="<?=$BASE_URL?>/images/like.svg" alt=""></button>
                                 <p>1.2M</p>
                             </span>
                             <span class="video-grade-btn">
-                                <button><img src="../images/comment.svg" alt=""></button>
+                                <button><img src="<?=$BASE_URL?>/images/comment.svg" alt=""></button>
                                 <p>12.9K</p>
                             </span>
                             <span class="video-grade-btn">
-                                <button><img src="../images/share.svg" alt=""></button>
+                                <button><img src="<?=$BASE_URL?>/images/share.svg" alt=""></button>
                                 <p>993</p>
                             </span>
                         </span>
                     </div>
-                </div>
+                </div>            
             </div>
             <span class="side-line"></span>
-            <div class="right--item">
-                <a href="otherProfile.html" class="item-author-avatar"></a>
-                <div class="item-video">
-                    <span class="acc-names">
-                        <a href="">acc-login</a>
-                        <p>acc-name</p>
-                        <p style="font-weight: 500;">9-12</p>
-                    </span>
-                    <span class="hashtags">
-                        <p>#tiktok</p>
-                        <p>#abc</p>
-                        <p>#rec</p>
-                    </span>
-                    <span class="music">
-                        <img src="../images/music.svg" alt="">
-                        <p>The Weekend - Starboy</p>
-                    </span>
-                    <div class="item-video-part">
-                        <span class="video"></span>
-                        <span>
-                            <span class="video-grade-btn">
-                                <button><img src="../images/like.svg" alt=""></button>
-                                <p>1.2M</p>
-                            </span>
-                            <span class="video-grade-btn">
-                                <button><img src="../images/comment.svg" alt=""></button>
-                                <p>12.9K</p>
-                            </span>
-                            <span class="video-grade-btn">
-                                <button><img src="../images/share.svg" alt=""></button>
-                                <p>993</p>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-            </div>
+
+            <?php 
+                }
+            }
+            ?>
         </div>
     </section>
 </body>

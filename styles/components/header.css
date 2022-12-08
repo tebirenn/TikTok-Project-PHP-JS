@@ -8,7 +8,7 @@ header {
 header > a:first-child img {
     width: 120px;
 }
-header > div:nth-child(2) {
+header > form {
     display: flex;
     background-color: #f1f1f2;
     height: 45px;
@@ -16,18 +16,18 @@ header > div:nth-child(2) {
     border-radius: 30px;
     padding: 10px 5px;
 }
-header > div:nth-child(2) input {
+header > form input {
     width: 100%;
     padding: 0 10px;
     background-color: transparent;
     border: none;
     outline: none;
 }
-header > div:nth-child(2) input::placeholder {
+header >form input::placeholder {
     font-size: 14px;
     font-weight: 500;
 }
-header > div:nth-child(2) a {
+header > form button {
     width: 52px;
     background-color: transparent;
     border: none;
@@ -36,7 +36,7 @@ header > div:nth-child(2) a {
     align-items: center;
     justify-content: center;
 }
-header > div:nth-child(2) a img {
+header > form button img {
     width: 40%;
     filter: invert(59%) sepia(0%) saturate(550%) hue-rotate(91deg) brightness(104%) contrast(82%);
 }
@@ -84,6 +84,7 @@ header > div:last-child a {
     display: block;
     width: 100%;
     height: 100%;
+    border-radius: 100%;
 }
 #header-account-avatar:hover #avatar-dropdown {
     display: flex;

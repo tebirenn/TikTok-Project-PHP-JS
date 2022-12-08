@@ -14,6 +14,8 @@ if (isset($_GET["user"])) {
     } else {
         mysqli_query($conn, "DELETE FROM subscribed WHERE sub_from=\"$username\" AND sub_to=\"$otherUser\";");
     }
+
+    header("Location: $BASE_URL/pages/recomend.php");
 }
 
 ?>
@@ -60,7 +62,9 @@ if (isset($_GET["user"])) {
                         <p>The Weekend - Starboy</p>
                     </span>
                     <div class="item-video-part">
-                        <span class="video"></span>
+                        <video class="video" controls>
+                            <source src="<?=$BASE_URL?>/videos/sample.mp4" type="video/mp4">
+                        </video>
                         <span>
                             <span class="video-grade-btn">
                                 <button><img src="<?=$BASE_URL?>/images/like.svg" alt=""></button>

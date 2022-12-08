@@ -16,111 +16,91 @@
     <span class="side-line"></span>
     <div class="main-left-recomendation">
         <p>Рекомендуемые аккаунты</p>
-        <a href="<?=$BASE_URL?>/pages/otherProfile.php" class="side-account">
-            <span class="account-avatar"></span>
+        <?php
+        $query_accounts = mysqli_query($conn, "SELECT * FROM accounts;");
+        $count_accounts = 0;
+        $username = $_SESSION["username"];
+        while ($row = mysqli_fetch_assoc($query_accounts)) {
+
+            
+
+            $otherUser = $row["username"];
+            $query_is_sub = mysqli_query($conn, "SELECT * FROM subscribed WHERE sub_from=\"$username\" AND sub_to=\"$otherUser\";");
+
+            if (mysqli_num_rows($query_is_sub) == 0 && $username != $otherUser) {
+                $count_accounts += 1;
+                $query_profile = mysqli_query($conn, "SELECT name, avatar_name FROM profile WHERE username=\"$otherUser\";");
+                $res_profile = mysqli_fetch_assoc($query_profile);
+                $otherNameL = $res_profile["name"];
+                $otherAvatarL = $res_profile["avatar_name"];
+        ?>
+
+        <a href="<?=$BASE_URL?>/pages/otherProfile.php?user=<?=$row['username']?>" class="side-account">
+            <span class="account-avatar">
+                <img src="<?=$BASE_URL?>/images/avatars/<?=$otherAvatarL?>" alt="">
+            </span>
             <span>
                 <h6 style="color: #000;">
-                    Any Account
+                    <?=$otherUser?>
                     <svg class="tiktok-shsbhf-StyledVerifyBadge e1aglo370" width="14" height="14" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="24" fill="#20D5EC"></circle><path fill-rule="evenodd" clip-rule="evenodd" d="M37.1213 15.8787C38.2929 17.0503 38.2929 18.9497 37.1213 20.1213L23.6213 33.6213C22.4497 34.7929 20.5503 34.7929 19.3787 33.6213L10.8787 25.1213C9.70711 23.9497 9.70711 22.0503 10.8787 20.8787C12.0503 19.7071 13.9497 19.7071 15.1213 20.8787L21.5 27.2574L32.8787 15.8787C34.0503 14.7071 35.9497 14.7071 37.1213 15.8787Z" fill="white"></path></svg>
                 </h6>
-                <p>Account name</p>
+                <p><?=$otherNameL?></p>
             </span>
         </a>
-        <a href="<?=$BASE_URL?>/pages/otherProfile.php" class="side-account">
-            <span class="account-avatar"></span>
-            <span>
-                <h6 style="color: #000;">
-                    Any Account
-                    <svg class="tiktok-shsbhf-StyledVerifyBadge e1aglo370" width="14" height="14" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="24" fill="#20D5EC"></circle><path fill-rule="evenodd" clip-rule="evenodd" d="M37.1213 15.8787C38.2929 17.0503 38.2929 18.9497 37.1213 20.1213L23.6213 33.6213C22.4497 34.7929 20.5503 34.7929 19.3787 33.6213L10.8787 25.1213C9.70711 23.9497 9.70711 22.0503 10.8787 20.8787C12.0503 19.7071 13.9497 19.7071 15.1213 20.8787L21.5 27.2574L32.8787 15.8787C34.0503 14.7071 35.9497 14.7071 37.1213 15.8787Z" fill="white"></path></svg>
-                </h6>
-                <p>Account name</p>
-            </span>
-        </a>
-        <a href="<?=$BASE_URL?>/pages/otherProfile.php" class="side-account">
-            <span class="account-avatar"></span>
-            <span>
-                <h6 style="color: #000;">
-                    Any Account
-                    <svg class="tiktok-shsbhf-StyledVerifyBadge e1aglo370" width="14" height="14" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="24" fill="#20D5EC"></circle><path fill-rule="evenodd" clip-rule="evenodd" d="M37.1213 15.8787C38.2929 17.0503 38.2929 18.9497 37.1213 20.1213L23.6213 33.6213C22.4497 34.7929 20.5503 34.7929 19.3787 33.6213L10.8787 25.1213C9.70711 23.9497 9.70711 22.0503 10.8787 20.8787C12.0503 19.7071 13.9497 19.7071 15.1213 20.8787L21.5 27.2574L32.8787 15.8787C34.0503 14.7071 35.9497 14.7071 37.1213 15.8787Z" fill="white"></path></svg>
-                </h6>
-                <p>Account name</p>
-            </span>
-        </a>
-        <a href="<?=$BASE_URL?>/pages/otherProfile.php" class="side-account">
-            <span class="account-avatar"></span>
-            <span>
-                <h6 style="color: #000;">
-                    Any Account
-                    <svg class="tiktok-shsbhf-StyledVerifyBadge e1aglo370" width="14" height="14" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="24" fill="#20D5EC"></circle><path fill-rule="evenodd" clip-rule="evenodd" d="M37.1213 15.8787C38.2929 17.0503 38.2929 18.9497 37.1213 20.1213L23.6213 33.6213C22.4497 34.7929 20.5503 34.7929 19.3787 33.6213L10.8787 25.1213C9.70711 23.9497 9.70711 22.0503 10.8787 20.8787C12.0503 19.7071 13.9497 19.7071 15.1213 20.8787L21.5 27.2574L32.8787 15.8787C34.0503 14.7071 35.9497 14.7071 37.1213 15.8787Z" fill="white"></path></svg>
-                </h6>
-                <p>Account name</p>
-            </span>
-        </a>
-        <a href="<?=$BASE_URL?>/pages/otherProfile.php" class="side-account">
-            <span class="account-avatar"></span>
-            <span>
-                <h6 style="color: #000;">
-                    Any Account
-                    <svg class="tiktok-shsbhf-StyledVerifyBadge e1aglo370" width="14" height="14" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="24" fill="#20D5EC"></circle><path fill-rule="evenodd" clip-rule="evenodd" d="M37.1213 15.8787C38.2929 17.0503 38.2929 18.9497 37.1213 20.1213L23.6213 33.6213C22.4497 34.7929 20.5503 34.7929 19.3787 33.6213L10.8787 25.1213C9.70711 23.9497 9.70711 22.0503 10.8787 20.8787C12.0503 19.7071 13.9497 19.7071 15.1213 20.8787L21.5 27.2574L32.8787 15.8787C34.0503 14.7071 35.9497 14.7071 37.1213 15.8787Z" fill="white"></path></svg>
-                </h6>
-                <p>Account name</p>
-            </span>
-        </a>
+
+        <?php
+            }
+
+            if ($count_accounts == 5) {
+                break;
+            }
+        } 
+        ?>
         <p>Показать все</p>
     </div>
     <span class="side-line"></span>
     <div class="main-left-recomendation">
         <p>Подписки на аккаунты</p>
-        <a href="<?=$BASE_URL?>/pages/otherProfile.php" class="side-account">
-            <span class="account-avatar"></span>
+        <?php
+        $query_accounts = mysqli_query($conn, "SELECT * FROM accounts;");
+        $count_accounts = 0;
+        $username = $_SESSION["username"];
+        while ($row = mysqli_fetch_assoc($query_accounts)) {
+
+            
+
+            $otherUser = $row["username"];
+            $query_is_sub = mysqli_query($conn, "SELECT * FROM subscribed WHERE sub_from=\"$username\" AND sub_to=\"$otherUser\";");
+
+            if (mysqli_num_rows($query_is_sub) != 0 && $username != $otherUser) {
+                $count_accounts += 1;
+                $query_profile = mysqli_query($conn, "SELECT name, avatar_name FROM profile WHERE username=\"$otherUser\";");
+                $res_profile = mysqli_fetch_assoc($query_profile);
+                $otherNameL = $res_profile["name"];
+                $otherAvatarL = $res_profile["avatar_name"];
+        ?>
+
+        <a href="<?=$BASE_URL?>/pages/otherProfile.php?user=<?=$row['username']?>" class="side-account">
+            <span class="account-avatar">
+                <img src="<?=$BASE_URL?>/images/avatars/<?=$otherAvatarL?>" alt="">
+            </span>
             <span>
                 <h6 style="color: #000;">
-                    Any Account
+                    <?=$otherUser?>
                     <svg class="tiktok-shsbhf-StyledVerifyBadge e1aglo370" width="14" height="14" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="24" fill="#20D5EC"></circle><path fill-rule="evenodd" clip-rule="evenodd" d="M37.1213 15.8787C38.2929 17.0503 38.2929 18.9497 37.1213 20.1213L23.6213 33.6213C22.4497 34.7929 20.5503 34.7929 19.3787 33.6213L10.8787 25.1213C9.70711 23.9497 9.70711 22.0503 10.8787 20.8787C12.0503 19.7071 13.9497 19.7071 15.1213 20.8787L21.5 27.2574L32.8787 15.8787C34.0503 14.7071 35.9497 14.7071 37.1213 15.8787Z" fill="white"></path></svg>
                 </h6>
-                <p>Account name</p>
+                <p><?=$otherNameL?></p>
             </span>
         </a>
-        <a href="<?=$BASE_URL?>/pages/otherProfile.php" class="side-account">
-            <span class="account-avatar"></span>
-            <span>
-                <h6 style="color: #000;">
-                    Any Account
-                    <svg class="tiktok-shsbhf-StyledVerifyBadge e1aglo370" width="14" height="14" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="24" fill="#20D5EC"></circle><path fill-rule="evenodd" clip-rule="evenodd" d="M37.1213 15.8787C38.2929 17.0503 38.2929 18.9497 37.1213 20.1213L23.6213 33.6213C22.4497 34.7929 20.5503 34.7929 19.3787 33.6213L10.8787 25.1213C9.70711 23.9497 9.70711 22.0503 10.8787 20.8787C12.0503 19.7071 13.9497 19.7071 15.1213 20.8787L21.5 27.2574L32.8787 15.8787C34.0503 14.7071 35.9497 14.7071 37.1213 15.8787Z" fill="white"></path></svg>
-                </h6>
-                <p>Account name</p>
-            </span>
-        </a>
-        <a href="<?=$BASE_URL?>/pages/otherProfile.php" class="side-account">
-            <span class="account-avatar"></span>
-            <span>
-                <h6 style="color: #000;">
-                    Any Account
-                    <svg class="tiktok-shsbhf-StyledVerifyBadge e1aglo370" width="14" height="14" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="24" fill="#20D5EC"></circle><path fill-rule="evenodd" clip-rule="evenodd" d="M37.1213 15.8787C38.2929 17.0503 38.2929 18.9497 37.1213 20.1213L23.6213 33.6213C22.4497 34.7929 20.5503 34.7929 19.3787 33.6213L10.8787 25.1213C9.70711 23.9497 9.70711 22.0503 10.8787 20.8787C12.0503 19.7071 13.9497 19.7071 15.1213 20.8787L21.5 27.2574L32.8787 15.8787C34.0503 14.7071 35.9497 14.7071 37.1213 15.8787Z" fill="white"></path></svg>
-                </h6>
-                <p>Account name</p>
-            </span>
-        </a>
-        <a href="<?=$BASE_URL?>/pages/otherProfile.php" class="side-account">
-            <span class="account-avatar"></span>
-            <span>
-                <h6 style="color: #000;">
-                    Any Account
-                    <svg class="tiktok-shsbhf-StyledVerifyBadge e1aglo370" width="14" height="14" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="24" fill="#20D5EC"></circle><path fill-rule="evenodd" clip-rule="evenodd" d="M37.1213 15.8787C38.2929 17.0503 38.2929 18.9497 37.1213 20.1213L23.6213 33.6213C22.4497 34.7929 20.5503 34.7929 19.3787 33.6213L10.8787 25.1213C9.70711 23.9497 9.70711 22.0503 10.8787 20.8787C12.0503 19.7071 13.9497 19.7071 15.1213 20.8787L21.5 27.2574L32.8787 15.8787C34.0503 14.7071 35.9497 14.7071 37.1213 15.8787Z" fill="white"></path></svg>
-                </h6>
-                <p>Account name</p>
-            </span>
-        </a>
-        <a href="<?=$BASE_URL?>/pages/otherProfile.php" class="side-account">
-            <span class="account-avatar"></span>
-            <span>
-                <h6 style="color: #000;">
-                    Any Account
-                    <svg class="tiktok-shsbhf-StyledVerifyBadge e1aglo370" width="14" height="14" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="24" fill="#20D5EC"></circle><path fill-rule="evenodd" clip-rule="evenodd" d="M37.1213 15.8787C38.2929 17.0503 38.2929 18.9497 37.1213 20.1213L23.6213 33.6213C22.4497 34.7929 20.5503 34.7929 19.3787 33.6213L10.8787 25.1213C9.70711 23.9497 9.70711 22.0503 10.8787 20.8787C12.0503 19.7071 13.9497 19.7071 15.1213 20.8787L21.5 27.2574L32.8787 15.8787C34.0503 14.7071 35.9497 14.7071 37.1213 15.8787Z" fill="white"></path></svg>
-                </h6>
-                <p>Account name</p>
-            </span>
-        </a>
+
+        <?php
+            }
+
+            if ($count_accounts == 5) {
+                break;
+            }
+        } 
+        ?>
         <p>Далее</p>
     </div>
     <span class="side-line"></span>

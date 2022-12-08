@@ -1,95 +1,17 @@
 @import url("../components/header.css");
+@import url("../components/section-left.css");
 
 header {
     padding: 0 14%;
 }
-
+#section-left {
+    width: 25%;
+}
 section {
     padding: 0 0 0 14%;
     display: flex;
     max-height: calc(100vh - 60px);
     /* justify-content: space-between; */
-}
-#section-left {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 25px 0;
-    width: 25%;
-    overflow: hidden;
-    transition: .4s;
-}
-#section-left:hover {
-    overflow-y: overlay;
-}
-#main-left-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-.side-menu {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-weight: 700;
-    color: #000;
-}
-.side-line {
-    display: flex;
-    width: 98%;
-    border-bottom: 0.5px solid #1618231F;
-}
-.side-account {
-    display: flex;
-}
-.main-left-recomendation {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-.main-left-recomendation > p {
-    font-size: 14px;
-    font-weight: 500;
-}
-.main-left-recomendation > p:last-child {
-    color: #fe2c55;
-    font-weight: 600;
-}
-.side-account {
-    display: flex;
-    gap: 10px;
-}
-.side-account h6 {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 16px;
-}
-.side-account p {
-    font-size: 12px;
-    color: #161823BF;
-}
-#section-left footer {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-#section-left footer p {
-    font-size: 10px;
-    font-weight: 500;
-}
-#section-left footer > span {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-#section-left footer > span > span {
-    display: flex;
-    gap: 5px;
-}
-#section-left footer span p:hover {
-    cursor: pointer;
-    text-decoration: underline;
 }
 #section-right {
     width: 58%;
@@ -136,6 +58,12 @@ section {
     width: 60px;
     height: 60px;
     background-color: #6c6c6c;
+    border-radius: 100%;
+}
+.finded-account--item .finded-avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
     border-radius: 100%;
 }
 .finded-account--item > span:last-child {
@@ -201,4 +129,20 @@ section {
     height: 24px;
     background-color: #6c6c6c;
     border-radius: 100%;
+}
+#no-find {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 0;
+}
+#no-find svg {
+    transform: scale(3);
+    margin-bottom: 15px;
+    fill: rgb(128, 130, 133);
+}
+#no-find p {
+    color: #161823BF;
 }
