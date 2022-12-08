@@ -4,10 +4,13 @@ include "../config/base_url.php";
 include "../config/db.php";
 
 $username = $_SESSION["username"];
-
 $name = $_SESSION["name"];
-$subscribes = $_SESSION["subscribes"];
-$subscribers = $_SESSION["subscribers"];
+
+$query_to_numbers = mysqli_query($conn, "SELECT * FROM subscribed WHERE sub_from=\"$username\"");
+$subscribes = mysqli_num_rows($query_to_numbers);
+
+$query_to_numbers = mysqli_query($conn, "SELECT * FROM subscribed WHERE sub_to=\"$username\"");
+$subscribers = mysqli_num_rows($query_to_numbers);
 $likes = $_SESSION["likes"];
 $avatarName = $_SESSION["avatar_name"];
 

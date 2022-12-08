@@ -14,3 +14,22 @@ button {
     align-items: center;
     justify-content: center;
 }
+
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #ebebeb80 #ffffff80;
+}
+*::-webkit-scrollbar {
+    width: 5px;
+}
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: #ebebeb80;
+    border-radius: 10px;
+}
+
+.red-text { 
+    color: #fe2c55;
+}

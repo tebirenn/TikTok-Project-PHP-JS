@@ -2,6 +2,20 @@
 session_start();
 include "../config/base_url.php";
 include "../config/db.php";
+
+if (isset($_GET["user"])) {
+    $username = $_SESSION["username"];
+    $otherUser = $_GET["user"];
+
+    $query3 = mysqli_query($conn, "SELECT * FROM subscribed WHERE sub_from=\"$username\" AND sub_to=\"$otherUser\";");
+
+    if (mysqli_num_rows($query3) == 0) {
+        mysqli_query($conn, "INSERT INTO subscribed(sub_from, sub_to) VALUES (\"$username\", \"$otherUser\");");
+    } else {
+        mysqli_query($conn, "DELETE FROM subscribed WHERE sub_from=\"$username\" AND sub_to=\"$otherUser\";");
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -20,12 +34,21 @@ include "../config/db.php";
     <section>
         <?php include "components/section-left.php" ?>
         <div id="section-right">
+            <?php
+            
+            $query = mysqli_query($conn, "SELECT username, name, avatar_name FROM profile");
+
+            while($row = mysqli_fetch_assoc($query)) {
+                if ($row["username"] != $_SESSION["username"]) {
+            ?>
             <div class="right--item">
-                <a href="otherProfile.html" class="item-author-avatar"></a>
+                <a href="<?=$BASE_URL?>/pages/otherProfile.php?user=<?=$row['username']?>" class="item-author-avatar">
+                    <img src="<?=$BASE_URL?>/images/avatars/<?=$row["avatar_name"]?>" alt="">
+                </a>
                 <div class="item-video">
                     <span class="acc-names">
-                        <a href="">acc-login</a>
-                        <p>acc-name</p>
+                        <a href=""><?=$row["username"]?></a>
+                        <p><?=$row["name"]?></p>
                     </span>
                     <span class="hashtags">
                         <p>#tiktok</p>
@@ -33,66 +56,54 @@ include "../config/db.php";
                         <p>#rec</p>
                     </span>
                     <span class="music">
-                        <img src="../images/music.svg" alt="">
+                        <img src="<?=$BASE_URL?>/images/music.svg" alt="">
                         <p>The Weekend - Starboy</p>
                     </span>
                     <div class="item-video-part">
                         <span class="video"></span>
                         <span>
                             <span class="video-grade-btn">
-                                <button><img src="../images/like.svg" alt=""></button>
+                                <button><img src="<?=$BASE_URL?>/images/like.svg" alt=""></button>
                                 <p>1.2M</p>
                             </span>
                             <span class="video-grade-btn">
-                                <button><img src="../images/comment.svg" alt=""></button>
+                                <button><img src="<?=$BASE_URL?>/images/comment.svg" alt=""></button>
                                 <p>12.9K</p>
                             </span>
                             <span class="video-grade-btn">
-                                <button><img src="../images/share.svg" alt=""></button>
+                                <button><img src="<?=$BASE_URL?>/images/share.svg" alt=""></button>
                                 <p>993</p>
                             </span>
                         </span>
                     </div>
                 </div>
-                <button class="subscribe-btn" onclick="sub(this)">Подписаться</button>
+
+                <?php
+                $username = $_SESSION["username"];
+                $otherUser = $row["username"];
+                $query2 = mysqli_query($conn, "SELECT * FROM subscribed WHERE sub_from=\"$username\" AND sub_to=\"$otherUser\";");
+                if (mysqli_num_rows($query2) == 1) {
+                ?>    
+                    <form action="recomend.php?user=<?=$row["username"]?>" method="POST">
+                        <button type="submit" class="subscribe-btn-true">Отписаться</button>
+                    </form>
+                <?php
+                } else {
+                ?>
+                    <form action="recomend.php?user=<?=$row["username"]?>" method="POST">
+                        <button type="submit" class="subscribe-btn-false">Подписаться</button>
+                    </form>
+                <?php
+                }
+                ?>
+                
             </div>
             <span class="side-line"></span>
-            <div class="right--item">
-                <a href="otherProfile.html" class="item-author-avatar"></a>
-                <div class="item-video">
-                    <span class="acc-names">
-                        <a href="">acc-login</a>
-                        <p>acc-name</p>
-                    </span>
-                    <span class="hashtags">
-                        <p>#tiktok</p>
-                        <p>#abc</p>
-                        <p>#rec</p>
-                    </span>
-                    <span class="music">
-                        <img src="../images/music.svg" alt="">
-                        <p>The Weekend - Starboy</p>
-                    </span>
-                    <div class="item-video-part">
-                        <span class="video"></span>
-                        <span>
-                            <span class="video-grade-btn">
-                                <button><img src="../images/like.svg" alt=""></button>
-                                <p>1.2M</p>
-                            </span>
-                            <span class="video-grade-btn">
-                                <button><img src="../images/comment.svg" alt=""></button>
-                                <p>12.9K</p>
-                            </span>
-                            <span class="video-grade-btn">
-                                <button><img src="../images/share.svg" alt=""></button>
-                                <p>993</p>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-                <button class="subscribe-btn" onclick="sub(this)">Подписаться</button>
-            </div>
+
+            <?php 
+                }
+            }
+            ?>
         </div>
     </section>
 

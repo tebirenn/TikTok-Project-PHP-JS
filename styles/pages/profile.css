@@ -1,28 +1,6 @@
 @import url("../components/header.css");
 @import url("../components/section-left.css");
 
-* {
-    scrollbar-width: auto;
-    scrollbar-color: #ebebeb #ffffff;
-}
-*::-webkit-scrollbar {
-    width: 9px;
-}
-
-*::-webkit-scrollbar-track {
-    background: #ffffff;
-}
-
-*::-webkit-scrollbar-thumb {
-    background-color: #ebebeb;
-    border-radius: 10px;
-    border: 3px solid #ffffff;
-}
-.red-text { 
-    color: #fe2c55;
-}
-
-
 header {
     padding: 0 1.5%;
 }
@@ -42,7 +20,7 @@ section {
     padding: 2%;
 }
 #section-right:hover {
-    overflow-y: scroll;
+    overflow-y: overlay;
 }
 #profile-main-info {
     display: flex;

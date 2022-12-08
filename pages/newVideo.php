@@ -33,7 +33,7 @@ include "../config/db.php";
                     <p>До 5 минут</p>
                     <p>Менее 2 ГБ</p>
                     <button>Выберите файл</button>
-                    <input type="file" class="file">
+                    <input type="file" class="file" id="new-video-input">
                 </div>
                 <div id="settings-and-inputs">
                     <div class="part-of-settings">
@@ -148,12 +148,13 @@ include "../config/db.php";
             <div>
                 <select name="" id="">
                     <option value="">Русский</option>
-                    <option value="">Англиский</option>
+                    <option value="">Английский</option>
                     <option value="">Казахский</option>
                 </select>
                 <p>© 2022 TikTok</p>
             </div>
         </footer>
     </section>
+    <script src="<?=$BASE_URL?>/scripts/inputFile.js"></script>
 </body>
 </html>

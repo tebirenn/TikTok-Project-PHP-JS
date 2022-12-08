@@ -4,27 +4,6 @@ header {
     padding: 0 1.5%;
 }
 
-* {
-    scrollbar-width: auto;
-    scrollbar-color: #ebebeb #ffffff;
-}
-*::-webkit-scrollbar {
-    width: 9px;
-}
-
-*::-webkit-scrollbar-track {
-    background: #ffffff;
-}
-
-*::-webkit-scrollbar-thumb {
-    background-color: #ebebeb;
-    border-radius: 10px;
-    border: 3px solid #ffffff;
-}
-.red-text { 
-    color: #fe2c55;
-}
-
 section {
     display: flex;
     flex-direction: column;
@@ -34,7 +13,7 @@ section {
     overflow: hidden;
 }
 section:hover {
-    overflow-y: scroll;
+    overflow-y: overlay;
 }
 #intro {
     background-image: url("../../images/bg4.png");

@@ -3,12 +3,12 @@
     flex-direction: column;
     gap: 20px;
     padding: 25px 0;
-    width: 15%;
+    /* width: 15%; */
     overflow: hidden;
-    transition: .4s;
+    /* transition: .4s; */
 }
 #section-left:hover {
-    overflow-y: scroll;
+    overflow-y: overlay;
 }
 #main-left-menu {
     display: flex;
