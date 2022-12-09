@@ -18,7 +18,7 @@ include "../config/db.php";
 <body>
     <?php include "components/header.php" ?>
     <section>
-        <div id="add-video-part">
+        <form id="add-video-part" action="<?=$BASE_URL?>/api/add_video.php" method="POST" enctype="multipart/form-data">
             <span>
                 <p>Загрузка видео</p>
                 <p>Опубликовать видео</p>
@@ -33,7 +33,7 @@ include "../config/db.php";
                     <p>До 5 минут</p>
                     <p>Менее 2 ГБ</p>
                     <button>Выберите файл</button>
-                    <input type="file" class="file" id="new-video-input">
+                    <input type="file" class="file" id="new-video-input" name="new-video-file">
                 </div>
                 <div id="settings-and-inputs">
                     <div class="part-of-settings">
@@ -42,19 +42,19 @@ include "../config/db.php";
                             <p>0 / 150</p>
                         </span>
                         <div class="border">
-                            <input type="text">
+                            <input type="text" name="new-video-header">
                             <span>
                                 <img src="https://lf16-tiktok-common.ttwstatic.com/obj/tiktok-web-common-us/ies/creator_center/svgs/at.062a03e9.svg">
-                                <img src="https://lf16-tiktok-common.ttwstatic.com/obj/tiktok-web-common-us/ies/creator_center/svgs/hashtag.234f1b9c.svg">
                             </span>
                         </div>
                     </div>
                     <div class="part-of-settings">
                         <span>
-                            <h4>Обложка</h4>
+                            <h4>Хэштеги</h4>
                         </span>
                         <div class="border">
-                            <span class="rect"></span>
+                            <input type="text" name="new-video-hashtags">
+                            <img src="https://lf16-tiktok-common.ttwstatic.com/obj/tiktok-web-common-us/ies/creator_center/svgs/hashtag.234f1b9c.svg">
                         </div>
                     </div>
                     <div class="part-of-settings">
@@ -98,11 +98,11 @@ include "../config/db.php";
                     </div>
                     <span>
                         <button>Удалить</button>
-                        <button disabled>Опубликовать</button>
+                        <button type="submit">Опубликовать</button>
                     </span>
                 </div>
             </div>
-        </div>
+        </form>
         <footer>
             <div>
                 <div>

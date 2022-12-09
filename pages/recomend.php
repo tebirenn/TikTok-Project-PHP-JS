@@ -37,20 +37,23 @@ if (isset($_GET["user"])) {
         <?php include "components/section-left.php" ?>
         <div id="section-right">
             <?php
-            
-            $query = mysqli_query($conn, "SELECT username, name, avatar_name FROM profile");
+            $username = $_SESSION["username"];
+            $query_to_videos = mysqli_query($conn, "SELECT * FROM videos_info WHERE from_who!=\"$username\";");
 
-            while($row = mysqli_fetch_assoc($query)) {
-                if ($row["username"] != $_SESSION["username"]) {
+            while($row = mysqli_fetch_assoc($query_to_videos)) {
+                $otherUserVideo = $row["from_who"];
+                $query_to_profile_video = mysqli_query($conn, "SELECT * FROM profile WHERE username=\"$otherUserVideo\";");
+                $res_profile_video = mysqli_fetch_assoc($query_to_profile_video);
+                $videoName = $row["name"];
             ?>
             <div class="right--item">
-                <a href="<?=$BASE_URL?>/pages/otherProfile.php?user=<?=$row['username']?>" class="item-author-avatar">
-                    <img src="<?=$BASE_URL?>/images/avatars/<?=$row["avatar_name"]?>" alt="">
+                <a href="<?=$BASE_URL?>/pages/otherProfile.php?user=<?=$otherUserVideo?>" class="item-author-avatar">
+                    <img src="<?=$BASE_URL?>/images/avatars/<?=$res_profile_video["avatar_name"]?>" alt="">
                 </a>
                 <div class="item-video">
                     <span class="acc-names">
-                        <a href=""><?=$row["username"]?></a>
-                        <p><?=$row["name"]?></p>
+                        <a href=""><?=$otherUserVideo?></a>
+                        <p><?=$res_profile_video["name"]?></p>
                     </span>
                     <span class="hashtags">
                         <p>#tiktok</p>
@@ -63,7 +66,7 @@ if (isset($_GET["user"])) {
                     </span>
                     <div class="item-video-part">
                         <video class="video" controls>
-                            <source src="<?=$BASE_URL?>/videos/sample.mp4" type="video/mp4">
+                            <source src="<?=$BASE_URL?>/videos/<?=$videoName?>" type="video/mp4">
                         </video>
                         <span>
                             <span class="video-grade-btn">
@@ -84,17 +87,17 @@ if (isset($_GET["user"])) {
 
                 <?php
                 $username = $_SESSION["username"];
-                $otherUser = $row["username"];
+                $otherUser = $otherUserVideo;
                 $query2 = mysqli_query($conn, "SELECT * FROM subscribed WHERE sub_from=\"$username\" AND sub_to=\"$otherUser\";");
                 if (mysqli_num_rows($query2) == 1) {
                 ?>    
-                    <form action="recomend.php?user=<?=$row["username"]?>" method="POST">
+                    <form action="recomend.php?user=<?=$otherUser?>" method="POST">
                         <button type="submit" class="subscribe-btn-true">Отписаться</button>
                     </form>
                 <?php
                 } else {
                 ?>
-                    <form action="recomend.php?user=<?=$row["username"]?>" method="POST">
+                    <form action="recomend.php?user=<?=$otherUser?>" method="POST">
                         <button type="submit" class="subscribe-btn-false">Подписаться</button>
                     </form>
                 <?php
@@ -105,7 +108,6 @@ if (isset($_GET["user"])) {
             <span class="side-line"></span>
 
             <?php 
-                }
             }
             ?>
         </div>

@@ -49,7 +49,8 @@ section {
     justify-content: space-between;
     padding-top: 10px;
 }
-#profile-main-info > div:first-child > span:last-child > form > span:last-child {
+#profile-main-info > div:first-child > span:last-child > form > span:last-child,
+#profile-main-info > div:first-child > span:last-child > span:last-child {
     display: flex;
     gap: 10px;
 }
@@ -108,18 +109,14 @@ section {
 }
 .profile-video-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 15px;
 }
-.profile-row--item {
-    width: 15%;
-}
-.profile-row--item span {
+.profile-row--item video {
     height: 250px;
-    background-color: #6c6c6c;
     border-radius: 5px;
     display: flex;
     align-items: flex-end;
-    padding: 10px;
     gap: 5px;
     color: #fff;
     font-weight: 600;

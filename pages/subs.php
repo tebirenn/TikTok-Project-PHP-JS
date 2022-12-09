@@ -20,23 +20,26 @@ include "../config/db.php";
     <section>
         <?php include "components/section-left.php" ?>
         <div id="section-right">
-
             <?php
-            
-            $query_pro = mysqli_query($conn, "SELECT username, name, avatar_name FROM profile");
+            $username = $_SESSION["username"];
+            $query_to_videos = mysqli_query($conn, "SELECT * FROM videos_info WHERE from_who!=\"$username\";");
 
-            while($row = mysqli_fetch_assoc($query_pro)) {
-                $queryIsSub = mysqli_query($conn, "SELECT * FROM subscribed WHERE sub_from=\"" . $_SESSION["username"] . "\" AND sub_to=\"" . $row["username"] . "\";");
-                if ($row["username"] != $_SESSION["username"] && mysqli_num_rows($queryIsSub) > 0) {
+            while($row = mysqli_fetch_assoc($query_to_videos)) {
+                $otherUserVideo = $row["from_who"];
+
+                if (mysqli_num_rows(mysqli_query($conn, "SELECT * FROM subscribed WHERE sub_from=\"$username\" AND sub_to=\"$otherUserVideo\";")) > 0) {
+                $query_to_profile_video = mysqli_query($conn, "SELECT * FROM profile WHERE username=\"$otherUserVideo\";");
+                $res_profile_video = mysqli_fetch_assoc($query_to_profile_video);
+                $videoName = $row["name"];
             ?>
             <div class="right--item">
-                <a href="<?=$BASE_URL?>/pages/otherProfile.php?user=<?=$row['username']?>" class="item-author-avatar">
-                    <img src="<?=$BASE_URL?>/images/avatars/<?=$row["avatar_name"]?>" alt="">
+                <a href="<?=$BASE_URL?>/pages/otherProfile.php?user=<?=$otherUserVideo?>" class="item-author-avatar">
+                    <img src="<?=$BASE_URL?>/images/avatars/<?=$res_profile_video["avatar_name"]?>" alt="">
                 </a>
                 <div class="item-video">
                     <span class="acc-names">
-                        <a href=""><?=$row["username"]?></a>
-                        <p><?=$row["name"]?></p>
+                        <a href=""><?=$otherUserVideo?></a>
+                        <p><?=$res_profile_video["name"]?></p>
                     </span>
                     <span class="hashtags">
                         <p>#tiktok</p>
@@ -49,7 +52,7 @@ include "../config/db.php";
                     </span>
                     <div class="item-video-part">
                         <video class="video" controls>
-                            <source src="<?=$BASE_URL?>/videos/sample.mp4" type="video/mp4">
+                            <source src="<?=$BASE_URL?>/videos/<?=$videoName?>" type="video/mp4">
                         </video>
                         <span>
                             <span class="video-grade-btn">
@@ -66,7 +69,7 @@ include "../config/db.php";
                             </span>
                         </span>
                     </div>
-                </div>            
+                </div>
             </div>
             <span class="side-line"></span>
 
@@ -74,7 +77,7 @@ include "../config/db.php";
                 }
             }
             ?>
-        </div>
+        </div>  
     </section>
 </body>
 </html>

@@ -11,7 +11,6 @@ section {
     max-height: calc(100vh - 60px);
     justify-content: space-between;
 }
-
 #section-right {
     width: 85%;
     display: flex;
@@ -80,18 +79,21 @@ section {
 }
 .profile-video-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 15px;
 }
-.profile-row--item {
+.profile-video-row > span {
+    display: block;
     width: 15%;
+    box-sizing: border-box;
 }
-.profile-row--item > span {
+.profile-row--item > span > video {
     height: 250px;
     background-color: #6c6c6c;
+    width: 150px;
     border-radius: 5px;
     display: flex;
     align-items: flex-end;
-    padding: 10px;
     color: #fff;
     font-weight: 600;
 }
